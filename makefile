@@ -9,3 +9,12 @@ down-v:
 
 restart:
 	docker-compose -f production.yml restart
+
+migrate:
+	docker-compose -f production.yml run --rm django python manage.py migrate
+
+migrate:
+	docker-compose -f production.yml run --rm django python manage.py makemigrations
+
+createsuperuser:
+	docker-compose -f production.yml run --rm django python manage.py createsuperuser
