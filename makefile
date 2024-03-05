@@ -13,7 +13,7 @@ restart:
 migrate:
 	docker-compose -f production.yml run --rm django python manage.py migrate
 
-migrate:
+makemigrations:
 	docker-compose -f production.yml run --rm django python manage.py makemigrations
 
 createsuperuser:
