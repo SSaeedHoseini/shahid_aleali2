@@ -1,14 +1,14 @@
+from django.contrib.auth import get_user_model
 from rest_framework import status
 from rest_framework.decorators import action
-from rest_framework.mixins import ListModelMixin
-from rest_framework.mixins import RetrieveModelMixin
-from rest_framework.mixins import UpdateModelMixin
+from rest_framework.mixins import ListModelMixin, RetrieveModelMixin, UpdateModelMixin
 from rest_framework.response import Response
 from rest_framework.viewsets import GenericViewSet
+from django.contrib.auth.models import Group
 
-from shahid_aleali.users.models import User
+from .serializers import GroupSerializer, UserSerializer, UserWithRolesSerializer, UserAvatarSerializer
 
-from .serializers import UserSerializer
+User = get_user_model()
 
 
 class UserViewSet(RetrieveModelMixin, ListModelMixin, UpdateModelMixin, GenericViewSet):
@@ -22,5 +22,18 @@ class UserViewSet(RetrieveModelMixin, ListModelMixin, UpdateModelMixin, GenericV
 
     @action(detail=False)
     def me(self, request):
-        serializer = UserSerializer(request.user, context={"request": request})
+        serializer = UserWithRolesSerializer(request.user, context={"request": request})
         return Response(status=status.HTTP_200_OK, data=serializer.data)
+
+    @action(methods=["PATCH"], detail=True, serializer_class=UserAvatarSerializer)
+    def avatar(self, request, username):
+        instance = self.get_object()
+        serializer = UserAvatarSerializer(instance, data=request.data, partial=True, context={"request": request})
+        if serializer.is_valid():
+            serializer.save()
+        return Response(status=status.HTTP_200_OK, data=serializer.data)
+
+
+class GroupViewSet(ListModelMixin, GenericViewSet):
+    serializer_class = GroupSerializer
+    queryset = Group.objects.all()
