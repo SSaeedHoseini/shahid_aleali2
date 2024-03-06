@@ -8,7 +8,7 @@ from mptt.models import MPTTModel, TreeForeignKey
 def upload_to(instance, filename):
     ext = filename.split(".")[-1]
 
-    return f"images/{uuid4()}.{ext}"
+    return f"{uuid4()}.{ext}"
 
 
 class MenuItem(MPTTModel):
