@@ -1,4 +1,4 @@
-version: '3'
+version: "3"
 
 volumes:
   shahid_aleali_local_postgres_data: {}
@@ -19,7 +19,7 @@ services:
       - ./.envs/.local/.django
       - ./.envs/.local/.postgres
     ports:
-      - '8000:8000'
+      - "8000:8000"
     command: /start
 
   postgres:
@@ -34,18 +34,18 @@ services:
     env_file:
       - ./.envs/.local/.postgres
 
-  docs:
-    image: shahid_aleali_local_docs
-    container_name: shahid_aleali_local_docs
-    build:
-      context: .
-      dockerfile: ./compose/local/docs/Dockerfile
-    env_file:
-      - ./.envs/.local/.django
-    volumes:
-      - ./docs:/docs:z
-      - ./config:/app/config:z
-      - ./shahid_aleali:/app/shahid_aleali:z
-    ports:
-      - '9000:9000'
-    command: /start-docs
+  # docs:
+  #   image: shahid_aleali_local_docs
+  #   container_name: shahid_aleali_local_docs
+  #   build:
+  #     context: .
+  #     dockerfile: ./compose/local/docs/Dockerfile
+  #   env_file:
+  #     - ./.envs/.local/.django
+  #   volumes:
+  #     - ./docs:/docs:z
+  #     - ./config:/app/config:z
+  #     - ./shahid_aleali:/app/shahid_aleali:z
+  #   ports:
+  #     - '9000:9000'
+  #   command: /start-docs
