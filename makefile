@@ -1,20 +1,22 @@
+file := local.yml
+
 up:
-	docker-compose -f production.yml up --build -d
+	docker-compose -f ${file} up --build -d
 
 down:
-	docker-compose -f production.yml down
+	docker-compose -f ${file} down
 
 down-v:
-	docker-compose -f production.yml down -v
+	docker-compose -f ${file} down -v
 
 restart:
-	docker-compose -f production.yml restart
+	docker-compose -f ${file} restart
 
 migrate:
-	docker-compose -f production.yml run --rm django python manage.py migrate
+	docker-compose -f ${file} run --rm django python manage.py migrate
 
 makemigrations:
-	docker-compose -f production.yml run --rm django python manage.py makemigrations
+	docker-compose -f ${file} run --rm django python manage.py makemigrations
 
 createsuperuser:
-	docker-compose -f production.yml run --rm django python manage.py createsuperuser
+	docker-compose -f ${file} run --rm django python manage.py createsuperuser
