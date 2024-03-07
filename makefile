@@ -1,4 +1,4 @@
-file := production.yml
+file := local.yml
 
 up:
 	docker-compose -f ${file} up --build -d
@@ -20,3 +20,12 @@ makemigrations:
 
 createsuperuser:
 	docker-compose -f ${file} run --rm django python manage.py createsuperuser
+
+collectstatic:
+	docker-compose -f ${file} run --rm django python manage.py collectstatic --clear
+
+load-theme:
+	docker-compose -f ${file} run --rm django python manage.py loaddata admin_interface_theme_django.json
+	docker-compose -f ${file} run --rm django python manage.py loaddata admin_interface_theme_bootstrap.json
+	docker-compose -f ${file} run --rm django python manage.py loaddata admin_interface_theme_foundation.json
+	docker-compose -f ${file} run --rm django python manage.py loaddata admin_interface_theme_uswds.json

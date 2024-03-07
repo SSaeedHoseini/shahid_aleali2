@@ -28,3 +28,4 @@ django-mptt==0.14.0 # https://github.com/django-mptt/django-mptt/tree/main
 djangorestframework-recursive==0.1.2 # https://github.com/heywbj/django-rest-framework-recursive
 django-colorfield==0.11.0 # https://github.com/fabiocaccamo/django-colorfield#readme
 django-filter==23.5 # https://pypi.org/project/django-filter/
+django-admin-interface==0.28.5 # https://github.com/fabiocaccamo/django-admin-interface
