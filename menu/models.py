@@ -2,7 +2,7 @@
 from django.db import models
 from django.contrib.auth.models import Group
 from uuid import uuid4
-from mptt.models import MPTTModel, TreeForeignKey
+from mptt.models import MPTTModel  # , TreeForeignKey
 from colorfield.fields import ColorField
 
 
@@ -15,8 +15,8 @@ def upload_to(instance, filename):
 class MenuItem(MPTTModel):
     title = models.CharField(max_length=100)
     image = models.ImageField(upload_to=upload_to)
-    color = ColorField(default='#FF0000')
-    parent = TreeForeignKey(
+    color = ColorField(default="#FF0000")
+    parent = models.ForeignKey(
         "self",
         on_delete=models.CASCADE,
         blank=True,
