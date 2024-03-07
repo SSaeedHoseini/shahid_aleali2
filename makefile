@@ -1,4 +1,4 @@
-file := local.yml
+file := production.yml
 
 up:
 	docker-compose -f ${file} up --build -d
